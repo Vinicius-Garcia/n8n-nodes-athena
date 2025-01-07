@@ -1,8 +1,8 @@
 import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
-export class AWSSDKWrapperApi implements ICredentialType {
-	name = 'awsSdkWrapperCredentialsApi';
-	displayName = 'AWS SDK Wrapper Credentials API';
+export class AWSAthenaWrapperApi implements ICredentialType {
+	name = 'awsAthenaWrapperCredentialsApi';
+	displayName = 'AWS Athena Credentials API';
 	properties: INodeProperties[] = [
 		// The credentials to get from user and save encrypted.
 		// Properties can be defined exactly in the same way
@@ -23,10 +23,22 @@ export class AWSSDKWrapperApi implements ICredentialType {
 			default: '',
 		},
 		{
-			displayName: 'Session Token',
-			name: 'sessionToken',
+			displayName: 'Token',
+			name: 'tokenKey',
 			type: 'string',
 			default: '',
 		},
+		{
+			displayName: 'Database Name',
+			name: 'databaseName',
+			type: 'string',
+			default: '',
+		},
+		{
+			displayName: 'S3',
+			name: 's3OutputLocation',
+			type: 'string',
+			default: '',
+		}
 	];
 }

@@ -1,7 +1,7 @@
 {
-	"name": "n8n-nodes-aws-sdk-v3",
-	"version": "3.0.3",
-	"description": "Wrapper for the AWS SDK for n8n, contains every service and operation in a very utilitarian way",
+	"name": "n8n-nodes-aws-athena",
+	"version": "1.0.0",
+	"description": "Athena Wrapper",
 	"keywords": [
 		"n8n-community-node-package",
 		"aws-sdk",
@@ -13,12 +13,12 @@
 	"license": "MIT",
 	"homepage": "https://boffinsridge.co.uk",
 	"author": {
-		"name": "Tobin Chew",
-		"email": "tobin@boffinsridge.co.uk"
+		"name": "Vinicius Garcia",
+		"email": "viniciusgarcia1300@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/tobinbc/n8n-nodes-aws-sdk-v3.git"
+		"url": "https://github.com/Vinicius-Garcia/n8n-nodes-aws-athena.git"
 	},
 	"scripts": {
 		"build": "tsc && gulp build:icons",
@@ -57,6 +57,7 @@
 		"n8n-workflow": "*"
 	},
 	"dependencies": {
-		"aws-sdk": "^2.1643.0"
+		"aws-sdk": "^2.1643.0",
+		"mysql2": "^3.12.0"
 	}
 }
