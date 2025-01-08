@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-aws-athena",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Athena Wrapper",
 	"keywords": [
 		"n8n-community-node-package",
@@ -11,7 +11,7 @@
 		"service"
 	],
 	"license": "MIT",
-	"homepage": "https://boffinsridge.co.uk",
+	"homepage": "",
 	"author": {
 		"name": "Vinicius Garcia",
 		"email": "viniciusgarcia1300@gmail.com"
