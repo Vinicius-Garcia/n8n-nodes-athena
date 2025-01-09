@@ -1,4 +1,5 @@
 import * as awsSdkClients from 'aws-sdk/clients/all';
+import Athena from 'aws-sdk/clients/athena';
 import {
 	IExecuteFunctions,
 	INodeExecutionData,
@@ -74,19 +75,22 @@ export class AWSAthenaWrapper implements INodeType {
 				}
 
 				// AWS Athena client configuration
-				const athena = new awsSdkClients.Athena({
+				const athena = new awsSdkClients.Athena(credentials.tokenKey ? {
 					region: 'us-east-1',
 					credentials: {
 						accessKeyId: credentials.accessKeyId.toString(),
 						secretAccessKey: credentials.secretAccessKey.toString(),
 						sessionToken: credentials.tokenKey.toString(),
 					},
+				} : {
+					region: 'us-east-1',
+					credentials: {
+						accessKeyId: credentials.accessKeyId.toString(),
+						secretAccessKey: credentials.secretAccessKey.toString(),
+					},
 				});
 
-				// Start query execution
-
-
-				const startQueryResponse = await athena
+		const startQueryResponse = await athena
     .startQueryExecution(
         database
             ? {
@@ -95,19 +99,17 @@ export class AWSAthenaWrapper implements INodeType {
                       Database: database,
                   },
                   ResultConfiguration: {
-                      OutputLocation: credentials.s3OutputLocation as string,
+                      OutputLocation: credentials.s3OutputLocation as string, // Confirme que é uma string
                   },
-              }
+              } as Athena.StartQueryExecutionInput
             : {
                   QueryString: query,
                   ResultConfiguration: {
-                      OutputLocation: credentials.s3OutputLocation as string,
+                      OutputLocation: credentials.s3OutputLocation as string, // Confirme que é uma string
                   },
-              }
+              } as Athena.StartQueryExecutionInput
     )
     .promise();
-
-
 
 				const queryExecutionId = startQueryResponse.QueryExecutionId;
 				if (!queryExecutionId) {
