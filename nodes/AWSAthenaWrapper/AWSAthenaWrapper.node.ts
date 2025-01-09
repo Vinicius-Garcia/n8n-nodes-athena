@@ -1,5 +1,4 @@
 import * as awsSdkClients from 'aws-sdk/clients/all';
-import Athena from 'aws-sdk/clients/athena';
 import {
 	IExecuteFunctions,
 	INodeExecutionData,
@@ -30,6 +29,13 @@ export class AWSAthenaWrapper implements INodeType {
 		],
 		properties: [
 			{
+				displayName: 'Database Name',
+				name: 'database',
+				type: 'string',
+				default: '',
+				placeholder: 'Database name',
+			},
+			{
 				displayName: 'Query',
 				name: 'query',
 				type: 'string',
@@ -53,6 +59,7 @@ export class AWSAthenaWrapper implements INodeType {
 			try {
 				// Retrieve node parameters
 				const query = this.getNodeParameter('query', itemIndex) as string;
+				const database = this.getNodeParameter('database', itemIndex) as string;
 				const credentials = await this.getCredentials('awsAthenaWrapperCredentialsApi');
 
 				// Validate credentials
@@ -77,17 +84,30 @@ export class AWSAthenaWrapper implements INodeType {
 				});
 
 				// Start query execution
+
+
 				const startQueryResponse = await athena
-    .startQueryExecution({
-        QueryString: query, // Ensure this matches the type definition
-        QueryExecutionContext: {
-            Database: credentials.databaseName,
-        },
-        ResultConfiguration: {
-            OutputLocation: credentials.s3OutputLocation,
-        },
-    } as Athena.StartQueryExecutionInput) // Explicitly cast the object to the correct type
+    .startQueryExecution(
+        database
+            ? {
+                  QueryString: query,
+                  QueryExecutionContext: {
+                      Database: database,
+                  },
+                  ResultConfiguration: {
+                      OutputLocation: credentials.s3OutputLocation as string,
+                  },
+              }
+            : {
+                  QueryString: query,
+                  ResultConfiguration: {
+                      OutputLocation: credentials.s3OutputLocation as string,
+                  },
+              }
+    )
     .promise();
+
+
 
 				const queryExecutionId = startQueryResponse.QueryExecutionId;
 				if (!queryExecutionId) {

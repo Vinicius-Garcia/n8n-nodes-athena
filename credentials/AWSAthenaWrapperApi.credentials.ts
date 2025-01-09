@@ -29,12 +29,6 @@ export class AWSAthenaWrapperApi implements ICredentialType {
 			default: '',
 		},
 		{
-			displayName: 'Database Name',
-			name: 'databaseName',
-			type: 'string',
-			default: '',
-		},
-		{
 			displayName: 'S3',
 			name: 's3OutputLocation',
 			type: 'string',
