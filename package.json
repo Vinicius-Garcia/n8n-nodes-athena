@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-aws-athena",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"description": "Athena Wrapper",
 	"keywords": [
 		"n8n-community-node-package",
@@ -35,10 +35,10 @@
 	"n8n": {
 		"n8nNodesApiVersion": 1,
 		"credentials": [
-			"dist/credentials/AWSSDKWrapperApi.credentials.js"
+			"dist/credentials/AWSAthenaWrapperApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/AWSSDKWrapper/AWSSDKWrapper.node.js"
+			"dist/nodes/AWSAthenaWrapper/AWSAthenaWrapper.node.js"
 		]
 	},
 	"devDependencies": {
